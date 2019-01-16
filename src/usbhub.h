@@ -200,6 +200,10 @@ public:
                 return bAddress;
         };
 
+        virtual uint8_t GetPortAddress() {
+		return bPortAddress;
+	};
+
         virtual uint32_t DEVCLASSOK(uint32_t klass) {
                 return (klass == 0x09);
         }

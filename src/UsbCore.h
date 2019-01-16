@@ -139,6 +139,10 @@ public:
                 return 0;
         }
 
+        virtual uint8_t GetPortAddress() {
+		return GetAddress();
+	}
+
         virtual void ResetHubPort(uint32_t /* port */) {
                 return;
         } // Note used for hubs only!
@@ -239,6 +243,7 @@ public:
         uint32_t ctrlData(uint32_t addr, uint32_t ep, uint32_t nbytes, uint8_t* dataptr, uint32_t direction);
         uint32_t ctrlStatus(uint32_t ep, uint32_t direction, uint32_t nak_limit);
         uint32_t inTransfer(uint32_t addr, uint32_t ep, uint16_t *nbytesptr, uint8_t* data, uint8_t bInterval = 0);
+        uint32_t ResetHubPort(uint8_t parent, uint8_t port);
         uint32_t outTransfer(uint32_t addr, uint32_t ep, uint32_t nbytes, uint8_t* data);
         uint32_t dispatchPkt(uint32_t token, uint32_t ep, uint32_t nak_limit);
 
