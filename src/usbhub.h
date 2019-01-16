@@ -169,6 +169,7 @@ class USBHub : USBDeviceConfig {
         EpInfo epInfo[2]; // interrupt endpoint info structure
 
         uint32_t bAddress; // address
+        uint32_t bPortAddress;
         uint32_t bNbrPorts; // number of ports
         //        uint8_t bInitState; // initialization state variable
         uint32_t qNextPollTime; // next poll time

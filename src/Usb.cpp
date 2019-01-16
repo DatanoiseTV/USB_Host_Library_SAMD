@@ -664,10 +664,10 @@ uint32_t USBHost::DefaultAddressing(uint32_t parent, uint32_t port, uint32_t low
 	return 0;
 }
 
-void USB::ResetHubPort(uint8_t parent, uint8_t port) {
+void USBHost::ResetHubPort(uint32_t parent, uint32_t port) {
 	if (parent == 0) {
 		// Send a bus reset on the root interface.
-		regWr(rHCTL, bmBUSRST); //issue bus reset
+		UHD_BusReset();
 		delay(102); // delay 102ms, compensate for clock inaccuracy.
 	} else {
 		for (uint8_t i = 0; i < USB_NUMDEVICES; i++) {
@@ -675,7 +675,7 @@ void USB::ResetHubPort(uint8_t parent, uint8_t port) {
 				UsbDeviceAddress addr;
 				addr.devAddress = devConfig[i]->GetAddress();
 				if (addr.bmHub && addr.bmAddress == parent) {
-					devConfig[i]->ResetHubPort(port);
+					devConfig[i]->ResetHubPort(parent, port);
 					break;
 				}
 			}
@@ -846,7 +846,7 @@ uint32_t USBHost::Configuring(uint32_t parent, uint32_t port, uint32_t lowspeed)
 	return rcode;
 }
 
-uint32_t USB::ReleaseDevice(uint8_t addr) {
+uint32_t USBHost::ReleaseDevice(uint32_t addr) {
         UsbDeviceAddress a;
         if(!addr)
                 return 0;
