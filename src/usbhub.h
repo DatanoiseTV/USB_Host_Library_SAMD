@@ -200,7 +200,7 @@ public:
                 return bAddress;
         };
 
-        virtual uint8_t GetPortAddress() {
+        virtual uint32_t GetPortAddress() {
 		return bPortAddress;
 	};
 
